@@ -1,4 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask
+from flask import render_template
+from flask import request
+from flask import jsonify
+
+from models.faq_engine import get_answer
 
 app = Flask(_name_)
 
@@ -6,13 +11,24 @@ app = Flask(_name_)
 def home():
     return render_template("chatbot.html")
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
+@app.route("/chat", methods=["POST"])
+def chat():
 
-@app.route("/dashboard")
-def dashboard():
-    return render_template("dashboard.html")
+    data = request.json
+
+    question = data["question"]
+
+    answer = get_answer(question)
+
+    if answer is None:
+        answer = "Sorry, I don't know that yet."
+
+    return jsonify({
+        "answer": answer
+    })
 
 if _name_ == "_main_":
     app.run(debug=True)
+
+
+
