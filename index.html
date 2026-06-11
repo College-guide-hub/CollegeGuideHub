@@ -1,26 +1,170 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>College Guide Hub</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:0;
+}
+
+.header{
+    background:#1e3a8a;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.chat-container{
+    max-width:700px;
+    margin:30px auto;
+    background:white;
+    border-radius:10px;
+    padding:20px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+#chatbox{
+    height:400px;
+    overflow-y:auto;
+    border:1px solid #ddd;
+    padding:10px;
+    margin-bottom:15px;
+}
+
+.user{
+    text-align:right;
+    margin:10px;
+    color:#2563eb;
+}
+
+.bot{
+    text-align:left;
+    margin:10px;
+    color:#16a34a;
+}
+
+input{
+    width:75%;
+    padding:10px;
+}
+
+button{
+    padding:10px 20px;
+    background:#1e3a8a;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#153075;
+}
+</style>
 </head>
 
 <body>
 
-<h1>College Placement Assistant</h1>
+<div class="header">
+    <h1>College Guide Hub</h1>
+    <p>AI-Based College Placement Assistance Chatbot</p>
+</div>
 
-<input type="text" placeholder="Ask a question">
+<div class="chat-container">
 
-<button>Ask</button>
+    <div id="chatbox">
+        <div class="bot">
+            Hello! Ask me about placements, resumes, interviews, or careers.
+        </div>
+    </div>
 
-<h3>Features</h3>
+    <input type="text" id="question"
+    placeholder="Ask a question...">
 
-<ul>
-<li>Placement Information</li>
-<li>Resume Guidance</li>
-<li>Interview Preparation</li>
-<li>Career Guidance</li>
-<li>Notifications</li>
-</ul>
+    <button onclick="sendMessage()">
+        Ask
+    </button>
+
+</div>
+
+<script>
+
+function sendMessage(){
+
+    let input=document.getElementById("question");
+
+    let question=input.value.trim();
+
+    if(question==="") return;
+
+    let chat=document.getElementById("chatbox");
+
+    chat.innerHTML +=
+    "<div class='user'>"+question+"</div>";
+
+    let answer="Sorry, I don't know that yet.";
+
+    let q=question.toLowerCase();
+
+    if(q.includes("tcs")){
+        answer=
+        "TCS Placement: Minimum 60% marks, package around 3.5-7 LPA depending on role.";
+    }
+
+    else if(q.includes("infosys")){
+        answer=
+        "Infosys Placement: Usually requires 60% throughout academics.";
+    }
+
+    else if(q.includes("company") || q.includes("companies")){
+        answer=
+        "Upcoming Companies: TCS, Infosys, Wipro, Accenture and Cognizant.";
+    }
+
+    else if(q.includes("resume")){
+        answer=
+        "Resume Tips: Keep it one page, add projects, skills, internships and achievements.";
+    }
+
+    else if(q.includes("interview")){
+        answer=
+        "Common HR Question: Tell me about yourself.";
+    }
+
+    else if(q.includes("career")){
+        answer=
+        "Career Paths: Software Developer, Data Analyst, AI Engineer, Cybersecurity Specialist.";
+    }
+
+    else if(q.includes("internship")){
+        answer=
+        "Popular Internships: Google, Microsoft, Amazon, IBM and Deloitte.";
+    }
+
+    else if(q.includes("course")){
+        answer=
+        "Recommended Courses: Full Stack Development, Machine Learning, Data Analytics.";
+    }
+
+    else if(q.includes("placement")){
+        answer=
+        "Check placement eligibility, company criteria and registration deadlines.";
+    }
+
+    chat.innerHTML +=
+    "<div class='bot'>"+answer+"</div>";
+
+    input.value="";
+
+    chat.scrollTop=chat.scrollHeight;
+}
+
+</script>
 
 </body>
 </html>
