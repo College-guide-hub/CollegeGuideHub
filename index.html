@@ -1,11 +1,14 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>College Guide Hub</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -22,7 +25,6 @@ body{
     color:white;
     text-align:center;
     padding:25px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.15);
 }
 
 .header h1{
@@ -31,13 +33,12 @@ body{
 
 .header p{
     margin-top:8px;
-    opacity:0.9;
 }
 
 .chat-container{
     width:90%;
-    max-width:850px;
-    margin:30px auto;
+    max-width:900px;
+    margin:25px auto;
     background:white;
     border-radius:15px;
     overflow:hidden;
@@ -54,13 +55,11 @@ body{
 }
 
 .quick-buttons button{
-    background:#e5e7eb;
-    color:#111;
-    padding:8px 15px;
-    font-size:14px;
+    padding:10px 15px;
     border:none;
     border-radius:8px;
     cursor:pointer;
+    background:#e5e7eb;
 }
 
 .quick-buttons button:hover{
@@ -77,29 +76,26 @@ body{
 .user{
     background:#2563eb;
     color:white;
-    padding:12px 15px;
+    padding:12px;
     border-radius:15px 15px 0 15px;
-    width:fit-content;
-    max-width:70%;
+    max-width:75%;
     margin-left:auto;
     margin-bottom:15px;
 }
 
 .bot{
     background:white;
-    color:#333;
-    padding:12px 15px;
+    padding:15px;
     border-radius:15px 15px 15px 0;
-    width:fit-content;
-    max-width:70%;
+    border:1px solid #ddd;
+    max-width:80%;
     margin-bottom:15px;
-    border:1px solid #e5e7eb;
+    line-height:1.6;
 }
 
 .input-area{
     display:flex;
     padding:15px;
-    background:white;
     border-top:1px solid #ddd;
 }
 
@@ -109,37 +105,36 @@ input{
     border:1px solid #ccc;
     border-radius:10px;
     font-size:16px;
-    outline:none;
-}
-
-input:focus{
-    border-color:#2563eb;
 }
 
 .send-btn{
     margin-left:10px;
-    padding:14px 25px;
+    padding:14px 20px;
     border:none;
     border-radius:10px;
     background:#2563eb;
     color:white;
-    font-size:16px;
     cursor:pointer;
-}
-
-.send-btn:hover{
-    background:#1d4ed8;
 }
 
 .footer{
     text-align:center;
     padding:15px;
     color:#666;
-    font-size:14px;
 }
-</style>
 
+h3{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+ul{
+    margin-left:20px;
+}
+
+</style>
 </head>
+
 <body>
 
 <div class="header">
@@ -153,13 +148,21 @@ input:focus{
         <button onclick="fillQuestion('companies')">Companies</button>
         <button onclick="fillQuestion('resume tips')">Resume</button>
         <button onclick="fillQuestion('interview')">Interview</button>
-        <button onclick="fillQuestion('career')">Career</button>
+        <button onclick="fillQuestion('career guidance')">Career</button>
         <button onclick="fillQuestion('internship')">Internships</button>
     </div>
 
     <div id="chatbox">
         <div class="bot">
-            👋 Welcome! Ask me about placements, resumes, interviews, internships, or career guidance.
+            👋 Welcome to College Guide Hub.<br><br>
+            Ask me about:
+            <ul>
+                <li>Placement Companies</li>
+                <li>Resume Tips</li>
+                <li>Interview Questions</li>
+                <li>Career Guidance</li>
+                <li>Internships</li>
+            </ul>
         </div>
     </div>
 
@@ -199,67 +202,166 @@ function sendMessage(){
     let input = document.getElementById("question");
     let question = input.value.trim();
 
-    if(question === "") return;
+    if(question==="") return;
 
     let chat = document.getElementById("chatbox");
 
     chat.innerHTML +=
-    "<div class='user'>" + question + "</div>";
-
-    let answer = "Sorry, I don't know that yet.";
+    `<div class="user">${question}</div>`;
 
     let q = question.toLowerCase();
 
-    if(q.includes("tcs")){
-        answer =
-        "TCS Placement: Minimum 60% marks required. Package typically ranges from 3.5–7 LPA depending on role.";
+    let answer = "";
+
+    if(q.includes("companies") || q.includes("company")){
+
+        answer = `
+        <h3>Upcoming Placement Companies</h3>
+
+        <ul>
+        <li>TCS</li>
+        <li>Infosys</li>
+        <li>Wipro</li>
+        <li>Accenture</li>
+        <li>Cognizant</li>
+        <li>Capgemini</li>
+        <li>Deloitte</li>
+        </ul>
+
+        <b>Expected Drives:</b> August–September
+        `;
     }
 
-    else if(q.includes("infosys")){
-        answer =
-        "Infosys Placement: Usually requires 60% throughout academics and basic programming knowledge.";
-    }
+    else if(q.includes("tcs")){
 
-    else if(q.includes("company") || q.includes("companies")){
-        answer =
-        "Upcoming Companies: TCS, Infosys, Wipro, Accenture, Cognizant, Capgemini and Deloitte.";
+        answer = `
+        <h3>TCS Placement Details</h3>
+
+        <ul>
+        <li>Eligibility: 60%+</li>
+        <li>Package: 3.5–7 LPA</li>
+        <li>Aptitude Test</li>
+        <li>Technical Interview</li>
+        <li>HR Interview</li>
+        </ul>
+        `;
     }
 
     else if(q.includes("resume")){
-        answer =
-        "Resume Tips: Keep it one page, add projects, technical skills, certifications, internships and achievements.";
+
+        answer = `
+        <h3>Resume Tips</h3>
+
+        <ul>
+        <li>Keep resume one page</li>
+        <li>Add projects</li>
+        <li>Add internships</li>
+        <li>Add certifications</li>
+        <li>Add GitHub profile</li>
+        <li>Add LinkedIn profile</li>
+        </ul>
+        `;
     }
 
     else if(q.includes("interview")){
-        answer =
-        "Common HR Question: Tell me about yourself. Prepare strengths, weaknesses and career goals.";
+
+        answer = `
+        <h3>Interview Preparation</h3>
+
+        <b>HR Questions</b>
+
+        <ul>
+        <li>Tell me about yourself</li>
+        <li>Why should we hire you?</li>
+        <li>What are your strengths?</li>
+        <li>What are your goals?</li>
+        </ul>
+
+        <b>Technical Topics</b>
+
+        <ul>
+        <li>DBMS</li>
+        <li>OOP</li>
+        <li>Data Structures</li>
+        <li>Operating Systems</li>
+        <li>Computer Networks</li>
+        </ul>
+        `;
     }
 
     else if(q.includes("career")){
-        answer =
-        "Recommended Career Paths: Software Developer, Data Analyst, AI Engineer, Cloud Engineer and Cybersecurity Specialist.";
+
+        answer = `
+        <h3>Career Guidance</h3>
+
+        <ul>
+        <li>Software Developer</li>
+        <li>Data Analyst</li>
+        <li>AI Engineer</li>
+        <li>Cloud Engineer</li>
+        <li>Cyber Security Specialist</li>
+        </ul>
+
+        <b>Recommended Certifications</b>
+
+        <ul>
+        <li>AWS Cloud Practitioner</li>
+        <li>Google Data Analytics</li>
+        <li>IBM AI Fundamentals</li>
+        </ul>
+        `;
     }
 
     else if(q.includes("internship")){
-        answer =
-        "Popular Internship Opportunities: Google, Microsoft, Amazon, IBM, Deloitte and Infosys.";
-    }
 
-    else if(q.includes("course")){
-        answer =
-        "Recommended Courses: Full Stack Development, Machine Learning, Data Analytics, Cyber Security and Cloud Computing.";
+        answer = `
+        <h3>Internship Opportunities</h3>
+
+        <ul>
+        <li>Google STEP</li>
+        <li>Microsoft Internship</li>
+        <li>Amazon Internship</li>
+        <li>IBM Internship</li>
+        <li>Deloitte Internship</li>
+        </ul>
+        `;
     }
 
     else if(q.includes("placement")){
-        answer =
-        "Placement Guidance: Check eligibility criteria, registration deadlines, aptitude preparation and interview schedules.";
+
+        answer = `
+        <h3>Placement Guidance</h3>
+
+        <ul>
+        <li>Register for drives</li>
+        <li>Check eligibility</li>
+        <li>Prepare aptitude</li>
+        <li>Practice interviews</li>
+        <li>Update resume</li>
+        </ul>
+        `;
+    }
+
+    else{
+
+        answer = `
+        <h3>Try Asking</h3>
+
+        <ul>
+        <li>Companies</li>
+        <li>TCS Placement</li>
+        <li>Resume Tips</li>
+        <li>Interview Questions</li>
+        <li>Career Guidance</li>
+        <li>Internships</li>
+        </ul>
+        `;
     }
 
     chat.innerHTML +=
-    "<div class='bot'>" + answer + "</div>";
+    `<div class="bot">${answer}</div>`;
 
     input.value = "";
-
     chat.scrollTop = chat.scrollHeight;
 }
 
@@ -267,3 +369,4 @@ function sendMessage(){
 
 </body>
 </html>
+```
