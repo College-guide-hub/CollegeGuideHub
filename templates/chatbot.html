@@ -1,26 +1,139 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
 <title>College Guide Hub</title>
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    max-width:800px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    color:#2563eb;
+}
+
+input{
+    width:75%;
+    padding:12px;
+}
+
+button{
+    padding:12px 20px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+#answer{
+    margin-top:20px;
+    padding:15px;
+    background:white;
+    border-radius:8px;
+    box-shadow:0 0 5px rgba(0,0,0,0.1);
+}
+</style>
+
+</head>
 <body>
 
-<h1>College Placement Assistant</h1>
+<h1>🎓 College Placement Assistant</h1>
 
 <input
 id="question"
 type="text"
-placeholder="Ask a question">
+placeholder="Ask about placements, resume, interview...">
 
 <button onclick="sendQuestion()">
 Ask
 </button>
 
-<p id="answer"></p>
+<div id="answer"></div>
 
-<script src="/static/js/chatbot.js">
+<script>
+
+function sendQuestion(){
+
+    let question =
+    document.getElementById("question")
+    .value.toLowerCase();
+
+    let answer =
+    "Sorry, I don't have information about that yet.";
+
+    if(question.includes("placement")){
+
+        answer = `
+        <h3>Placement Information</h3>
+
+        <ul>
+        <li>TCS</li>
+        <li>Infosys</li>
+        <li>Wipro</li>
+        <li>Accenture</li>
+        <li>Cognizant</li>
+        </ul>
+
+        <b>Eligibility:</b> 60% aggregate
+        `;
+    }
+
+    else if(question.includes("resume")){
+
+        answer = `
+        <h3>Resume Tips</h3>
+
+        <ul>
+        <li>Keep it one page</li>
+        <li>Add projects</li>
+        <li>Add internships</li>
+        <li>Add certifications</li>
+        <li>Use professional email</li>
+        </ul>
+        `;
+    }
+
+    else if(question.includes("interview")){
+
+        answer = `
+        <h3>Interview Preparation</h3>
+
+        <b>HR Questions</b>
+
+        <ul>
+        <li>Tell me about yourself</li>
+        <li>Why should we hire you?</li>
+        <li>What are your strengths?</li>
+        </ul>
+        `;
+    }
+
+    else if(question.includes("career")){
+
+        answer = `
+        <h3>Career Guidance</h3>
+
+        <ul>
+        <li>Software Development</li>
+        <li>Data Science</li>
+        <li>AI & Machine Learning</li>
+        <li>Cyber Security</li>
+        </ul>
+        `;
+    }
+
+    document.getElementById("answer")
+    .innerHTML = answer;
+}
 </script>
 
 </body>
 </html>
+```
