@@ -709,19 +709,22 @@ answer=`
 </ul>
 `;
 }
+let typingId = "typing" + Date.now();
 
-chat.innerHTML+=
-`<div class="bot" id="typing">
+chat.innerHTML +=
+`<div class="bot" id="${typingId}">
 Typing...
 </div>`;
 
-setTimeout(()=>{
+setTimeout(() => {
 
-document.getElementById("typing").innerHTML=
+document.getElementById(typingId).innerHTML =
 answer +
 `<br><small>${time}</small>`;
 
 saveChat();
+
+chat.scrollTop = chat.scrollHeight;
 
 },1000);
 
